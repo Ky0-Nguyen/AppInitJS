@@ -5,8 +5,11 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 const iconUser = <FontAwesome name="user-o" size={width(20)} color={'#C3C3C3'} />
 
-const componentName = () => (
+const componentName = ({ closeModal }) => (
   <View style={styles.container}>
+    <TouchableOpacity style={styles.btnClose} onPress={closeModal}>
+      <Text style={styles.txtButton}>{'X'}</Text>
+    </TouchableOpacity>
     <View style={styles.contInfo}>
       <View style={styles.contLeft}>
 
@@ -106,5 +109,8 @@ const styles = StyleSheet.create({
     paddingVertical: height(0.5),
     borderRadius: 5,
     marginTop: height(2)
+  },
+  btnClose: {
+    alignSelf: 'flex-end'
   }
 })

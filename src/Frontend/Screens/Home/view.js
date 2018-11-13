@@ -150,7 +150,7 @@ export default class componentName extends Component {
     const { listDataSearch, listData, driveSelected, isShowModalEdit, isShowModalAdd } = this.state
     return (
       <View style={styles.container}>
-        <CoreLayout title={'Home'} rightAction={() => console.log('tuan')}>
+        <CoreLayout title={'Home'} rightAction={() => this.setState({ isShowModalAdd: true })}>
           <View style={styles.contSearch}>
             <TextInput style={styles.inp} onChangeText={this._onChangeSearch}/>
             {iconSearch}
@@ -178,7 +178,7 @@ export default class componentName extends Component {
           <ModalEdit />
         </CustomModal>
         <CustomModal style={styles.modalInfo} isShowModal={isShowModalAdd}>
-          <ModalAdd />
+          <ModalAdd closeModal={() => this.setState({ isShowModalAdd: false })}/>
         </CustomModal>
 
         <CustomLoading style={styles.modalLoading} isProcess={this.state.isLoading}/>
