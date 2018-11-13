@@ -17,6 +17,8 @@ export const loadInitial = () => {
     if (!listUser || listUser.length === 0) {
       dispatch(setListUser(driver))
     }
-    Actions.home()
+    setTimeout(() => {
+      Actions.home()
+    }, 2000)
   }
 }

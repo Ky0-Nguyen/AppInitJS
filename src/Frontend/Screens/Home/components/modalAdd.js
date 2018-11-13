@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 
-const componentName = () => (
+const componentName = ({ params }) => (
   <View>
     <Text>componentName</Text>
   </View>

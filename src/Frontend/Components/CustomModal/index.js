@@ -10,7 +10,7 @@ import {
 import * as Animatable from 'react-native-animatable'
 import { height, width } from 'react-native-dimension'
 
-class MyClass extends React.Compnent {
+class MyClass extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -120,15 +120,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: width(5),
     paddingVertical: height(2)
   },
-  contFooter: {
-    flex: 3,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  txtTitle: {
-    fontSize: width(4),
-    fontWeight: 'bold'
-  },
   txtMessage: {
     color: '#111111',
     textAlign: 'center',
@@ -146,9 +137,5 @@ const styles = StyleSheet.create({
     marginLeft: width(80),
     marginTop: height(2),
     zIndex: 1000
-  },
-  img: {
-    height: width(14),
-    width: width(14)
   }
 })
