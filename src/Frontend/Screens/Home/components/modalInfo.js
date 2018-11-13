@@ -18,7 +18,7 @@ const componentName = ({ data, closeModal }) => (
 
         {/* Name  */}
         <View>
-          <Text style={styles.txtTitle}>{'Name driver'}</Text>
+          <Text style={styles.txtTitle}>{'Age driver'}</Text>
           <Text style={styles.txtContent}>{data.age}</Text>
         </View>
 

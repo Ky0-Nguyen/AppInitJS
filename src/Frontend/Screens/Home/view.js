@@ -8,6 +8,9 @@ import CoreLayout from '../../Containers/CoreHeader'
 import { CustomModal, CustomLoading } from '../../Components'
 
 import ModalInfo from './components/modalInfo'
+import ModalAdd from './components/modalAdd'
+import ModalDelete from './components/modalDelete'
+import ModalEdit from './components/modalEdit'
 
 const iconUser = <FontAwesome name="user-o" size={width(20.5)} color={'#C3C3C3'} />
 const iconSearch = <FontAwesome name="search" size={width(10)} color={'#C3C3C3'} />
@@ -22,7 +25,10 @@ export default class componentName extends Component {
       listDataSearch: [],
       isLoading: false,
       pageLoad: 1,
-      driveSelected: {}
+      driveSelected: {},
+
+      isShowModalEdit: false,
+      isShowModalAdd: false
     }
   }
 
@@ -127,14 +133,24 @@ export default class componentName extends Component {
   /** -------------------------------------
   * @method - method
   * @param - param
+  * @author - Nguyen Tuan / 2018-11-13 21:02:49
+  * @description description
+  * --------------------------------------- */
+  _onCloseModalEdit =() => {
+
+  }
+
+  /** -------------------------------------
+  * @method - method
+  * @param - param
   * @author - Nguyen Tuan / 2018-11-13 19:57:09
   * @description description
   * --------------------------------------- */
   render () {
-    const { listDataSearch, listData, driveSelected } = this.state
+    const { listDataSearch, listData, driveSelected, isShowModalEdit, isShowModalAdd } = this.state
     return (
-      <CoreLayout title={'Home'} rightAction={() => console.log('tuan')}>
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <CoreLayout title={'Home'} rightAction={() => console.log('tuan')}>
           <View style={styles.contSearch}>
             <TextInput style={styles.inp} onChangeText={this._onChangeSearch}/>
             {iconSearch}
@@ -149,12 +165,25 @@ export default class componentName extends Component {
             renderItem={this._renderItem}
             extraData={this.state}
           />
-        </View>
+        </CoreLayout>
         <CustomModal style={styles.modalInfo} ref={refs => (this.modalInfo = refs)}>
           <ModalInfo data={driveSelected} closeModal={() => this.modalInfo._hideModal()}/>
         </CustomModal>
+
+        <CustomModal style={styles.modalInfo} ref={refs => (this.modalDelete = refs)}>
+          <ModalDelete data={driveSelected} closeModal={() => this.modalInfo._hideModal()}/>
+        </CustomModal>
+
+        <CustomModal style={styles.modalInfo} isShowModal={isShowModalEdit}>
+          <ModalEdit />
+        </CustomModal>
+        <CustomModal style={styles.modalInfo} isShowModal={isShowModalAdd}>
+          <ModalAdd />
+        </CustomModal>
+
         <CustomLoading style={styles.modalLoading} isProcess={this.state.isLoading}/>
-      </CoreLayout>
+      </View>
+
     )
   }
 }
@@ -205,10 +234,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: width(3)
   },
   modalInfo: {
-    top: height(15)
+    top: height(25)
   },
   modalLoading: {
-    top: height(25)
+    top: height(35)
   },
   inp: {
     width: width(84),
