@@ -8,15 +8,14 @@ export const internetData = createReducer(init.internetInit, {
   }
 })
 
-
 /** -------------------------------------
 * @method - method
 * @param - param
 * @author - Nguyen Tuan / 2018-11-13 12:07:48
 * @description description
-* ---------------------------------------*/
-export const listUserData = createReducer(init.listUserInit,{
-  [key.SET_LIST_USER] (state, action){
+* --------------------------------------- */
+export const listUserData = createReducer(init.listUserInit, {
+  [key.SET_LIST_USER] (state, action) {
     return action.payload
   }
 })
