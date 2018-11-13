@@ -4,40 +4,15 @@ import {
   StatusBar,
   TouchableWithoutFeedback,
   Keyboard,
-  Platform,
   StyleSheet
 } from 'react-native'
 
-import {width, height} from 'react-native-dimension'
+import { width, height } from 'react-native-dimension'
 
 import gStyles from '../../../Common/GlobalStyles'
 import CoreHeader from './CoreHeader'
 
-interface Props {
-  handleConnectionChange?: any
-  funcDefaultThis?: any
-  loadInitialData?: any
-  customRightIcon?: any
-  customRightStyle?: any
-  rightView?: any
-  rightAction?: any
-  children?: any
-  style?: any
-  title?: string
-  headerStyle?: any
-  leftAction?: any
-  headerCustomView?: any
-  parentView?: string
-  disabledCustomRightIcon?: boolean
-  isTouchDisable?: boolean
-}
-
-interface State {
-
-}
-
-
-class CoreLayoutContainer extends React.Component <Props, State> {
+class CoreLayoutContainer extends React.Component {
 dismissKeyboard = () => Keyboard.dismiss()
 get renderContent () {
   const {

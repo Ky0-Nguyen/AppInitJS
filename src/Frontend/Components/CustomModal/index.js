@@ -73,7 +73,7 @@ class MyClass extends React.Compnent {
             }
           </Animatable.View>
         </View>
-        : null
+        : <View/>
     )
   }
 }
