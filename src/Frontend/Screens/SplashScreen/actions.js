@@ -6,6 +6,19 @@ import { setListUser } from '../../../Controllers/Redux/Actions'
 import { KEYSTORE } from '../../../Common/GlobalConstants'
 
 /** -------------------------------------
+* @method - method
+* @param - param
+* @author - Nguyen Tuan / 2018-11-14 08:14:46
+* @description description
+* --------------------------------------- */
+let _this
+export const funcDefaultThis = (THIS) => {
+  return () => {
+    _this = THIS
+  }
+}
+
+/** -------------------------------------
 * @method - loadInitial
 * @param - param
 * @author - Nguyen Tuan / 2018-11-13 12:57:01
@@ -18,7 +31,7 @@ export const loadInitial = () => {
       dispatch(setListUser(driver))
     }
     setTimeout(() => {
-      Actions.home()
-    }, 2000)
+      _this.setState({ isProcess: false }, () => Actions.home())
+    }, 2500)
   }
 }
