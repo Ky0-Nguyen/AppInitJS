@@ -5,37 +5,61 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 const iconUser = <FontAwesome name="user-o" size={width(20)} color={'#C3C3C3'} />
 
-const componentName = ({ data }) => (
+const INPUT_NAME = 'inpName'
+const INPUT_AGE = 'inpAge'
+const INPUT_LIENSE = 'inpLiense'
+const INPUT_PHONE = 'inpPhone'
+const componentName = ({ closeModal, onEdit, data, onChangeText, txtName, txtAge, txtLiense, txtPhone }) => (
   <View style={styles.container}>
+    <TouchableOpacity style={styles.btnClose} onPress={closeModal}>
+      <Text style={styles.txtButton}>{'X'}</Text>
+    </TouchableOpacity>
     <View style={styles.contInfo}>
       <View style={styles.contLeft}>
 
         {/* Name  */}
         <View>
           <Text style={styles.txtTitle}>{'Age driver'}</Text>
-          <TextInput style={styles.inp} placeholder={'Age driver'}/>
+          <TextInput
+            value={txtAge}
+            keyboardType={'numeric'}
+            maxLength={2}
+            onChangeText={text => onChangeText(text, INPUT_AGE)}
+            style={styles.inp} placeholder={'Age driver'}/>
         </View>
 
         {/* Liense */}
         <View>
           <Text style={styles.txtTitle}>{'Liense driver'}</Text>
-          <TextInput style={styles.inp} placeholder={'Liense driver'}/>
+          <TextInput
+            value={txtLiense}
+            maxLength={3}
+            onChangeText={text => onChangeText(text, INPUT_LIENSE)}
+            style={styles.inp} placeholder={'Liense driver'}/>
         </View>
 
         {/*  Phone number */}
         <View>
           <Text style={styles.txtTitle}>{'Cell phone driver'}</Text>
-          <TextInput style={styles.inp} placeholder={'Cell phone driver'}/>
+          <TextInput
+            value={txtPhone}
+            maxLength={12}
+            onChangeText={text => onChangeText(text, INPUT_PHONE)}
+            style={styles.inp} placeholder={'Cell phone driver'}/>
         </View>
       </View>
       <View style={styles.contRight}>
         <View style={styles.contImage}>
           {iconUser}
         </View>
-        <TextInput style={styles.inpName} placeholder={'Name driver'}/>
+        <TextInput
+          value={txtName}
+          maxLength={7}
+          onChangeText={text => onChangeText(text, INPUT_NAME)}
+          style={styles.inpName} placeholder={'Short Name driver'}/>
       </View>
     </View>
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onEdit}>
       <View style={styles.contFunction}>
         <Text style={styles.txtButton}>{'Edit'}</Text>
       </View>
@@ -106,5 +130,8 @@ const styles = StyleSheet.create({
     paddingVertical: height(0.5),
     borderRadius: 5,
     marginTop: height(2)
+  },
+  btnClose: {
+    alignSelf: 'flex-end'
   }
 })

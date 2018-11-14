@@ -4,7 +4,7 @@ import { width, height } from 'react-native-dimension'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 const iconUser = <FontAwesome name="user-o" size={width(20)} color={'#C3C3C3'} />
 
-const componentName = ({ data, closeModal, funcDeleteDriver }) => (
+const componentName = ({ data, closeModal, onDelete }) => (
   <View style={styles.container}>
     <View style={styles.contInfo}>
       <View style={styles.contLeft}>
@@ -34,7 +34,7 @@ const componentName = ({ data, closeModal, funcDeleteDriver }) => (
         <Text style={styles.txtContent}>{data.name}</Text>
       </View>
     </View>
-    <TouchableOpacity onPress={funcDeleteDriver}>
+    <TouchableOpacity onPress={onDelete}>
       <View style={styles.contFunction}>
         <Text style={styles.txtButton}>{'Confirm delete'}</Text>
       </View>
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: '#F0F0F0',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: height(2)
   },
@@ -87,5 +87,10 @@ const styles = StyleSheet.create({
   txtContent: {
     fontSize: width(4),
     fontWeight: 'bold'
+  },
+  txtButton: {
+    fontSize: width(5),
+    fontWeight: 'bold',
+    color: 'blue'
   }
 })

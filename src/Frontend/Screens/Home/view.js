@@ -28,7 +28,24 @@ export default class componentName extends Component {
       driveSelected: {},
 
       isShowModalEdit: false,
-      isShowModalAdd: false
+      isShowModalAdd: false,
+
+      txtName: '',
+      txtAge: '',
+      txtLiense: '',
+      txtPhone: ''
+    }
+    props.funcDefaultThis(this)
+    // eslint-disable-next-line no-extend-native
+    Array.prototype.remove = function () {
+      var what; var a = arguments; var L = a.length; var ax
+      while (L && this.length) {
+        what = a[--L]
+        while ((ax = this.indexOf(what)) !== -1) {
+          this.splice(ax, 1)
+        }
+      }
+      return this
     }
   }
 
@@ -57,7 +74,7 @@ export default class componentName extends Component {
         listData.push(item)
       }
     })
-    this.setState({ listData })
+    this.setState({ listData: listData.reverse() })
   }
   /** -------------------------------------
   * @method - method
@@ -127,7 +144,7 @@ export default class componentName extends Component {
   * @description description
   * --------------------------------------- */
   _onChangeSearch =(text) => {
-    this.setState({ listDataSearch: this._internalSearch(text) })
+    this.setState({ listDataSearch: this._internalSearch(text).reverse() })
   }
 
   /** -------------------------------------
@@ -140,6 +157,9 @@ export default class componentName extends Component {
 
   }
 
+  _onAdd =() => {
+
+  }
   /** -------------------------------------
   * @method - method
   * @param - param
@@ -147,10 +167,16 @@ export default class componentName extends Component {
   * @description description
   * --------------------------------------- */
   render () {
-    const { listDataSearch, listData, driveSelected, isShowModalEdit, isShowModalAdd } = this.state
+    const {
+      listDataSearch, listData, driveSelected, isShowModalEdit, isShowModalAdd,
+      txtName, txtAge, txtLiense, txtPhone
+    } = this.state
+    const { onAdd, onChangeText, onDelete, onEdit } = this.props
     return (
       <View style={styles.container}>
-        <CoreLayout title={'Home'} rightAction={() => this.setState({ isShowModalAdd: true })}>
+        <CoreLayout title={'Home'} rightAction={() => {
+          this.setState({ isShowModalAdd: true, driveSelected: {} })
+        }}>
           <View style={styles.contSearch}>
             <TextInput style={styles.inp} onChangeText={this._onChangeSearch}/>
             {iconSearch}
@@ -167,18 +193,46 @@ export default class componentName extends Component {
           />
         </CoreLayout>
         <CustomModal style={styles.modalInfo} ref={refs => (this.modalInfo = refs)}>
-          <ModalInfo data={driveSelected} closeModal={() => this.modalInfo._hideModal()}/>
+          <ModalInfo
+            data={driveSelected}
+            closeModal={() => this.modalInfo._hideModal()}
+
+            openModalDelete={() => {
+              this.modalInfo._hideModal()
+              this.modalDelete._showModal()
+            }}
+
+            openModalEdit={() => {
+              this.modalInfo._hideModal()
+              this.setState({
+                isShowModalEdit: true,
+                txtName: driveSelected.name,
+                txtAge: driveSelected.age,
+                txtLiense: driveSelected.liense,
+                txtPhone: driveSelected.phone
+              })
+            }}
+          />
         </CustomModal>
 
         <CustomModal style={styles.modalInfo} ref={refs => (this.modalDelete = refs)}>
-          <ModalDelete data={driveSelected} closeModal={() => this.modalInfo._hideModal()}/>
+          <ModalDelete onDelete={onDelete} data={driveSelected} closeModal={() => this.modalInfo._hideModal()}/>
         </CustomModal>
 
         <CustomModal style={styles.modalInfo} isShowModal={isShowModalEdit}>
-          <ModalEdit />
+          <ModalEdit
+            txtName={txtName}
+            txtAge={txtAge}
+            txtLiense={txtLiense}
+            txtPhone={txtPhone}
+
+            data={driveSelected}
+            onChangeText={onChangeText}
+            onEdit={onEdit}
+            closeModal={() => this.setState({ isShowModalEdit: false })}/>
         </CustomModal>
         <CustomModal style={styles.modalInfo} isShowModal={isShowModalAdd}>
-          <ModalAdd closeModal={() => this.setState({ isShowModalAdd: false })}/>
+          <ModalAdd onChangeText={onChangeText} onAdd={onAdd} closeModal={() => this.setState({ isShowModalAdd: false })}/>
         </CustomModal>
 
         <CustomLoading style={styles.modalLoading} isProcess={this.state.isLoading}/>

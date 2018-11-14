@@ -11,7 +11,7 @@ const iconDelete = <MaterialCommunityIcons name="delete" size={width(10)} color=
 const iconCar = <FontAwesome name="car" size={width(10)} color={'#111111'}/>
 const iconClose = <FontAwesome name="close" size={width(10)} color={'#111111'}/>
 
-const componentName = ({ data, closeModal }) => (
+const componentName = ({ data, closeModal, openModalDelete, openModalEdit }) => (
   <View style={styles.container}>
     <View style={styles.contInfo}>
       <View style={styles.contLeft}>
@@ -48,10 +48,10 @@ const componentName = ({ data, closeModal }) => (
       <TouchableOpacity>
         {iconCar}
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={openModalEdit}>
         {iconEdit}
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={openModalDelete}>
         {iconDelete}
       </TouchableOpacity>
       <TouchableOpacity onPress={closeModal}>
